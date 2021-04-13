@@ -8,7 +8,7 @@ function randomValue(min, max) {
 
 
 let seattle = {
-  location: 'seattle',
+  location: 'Seattle',
   minCust: 23,
   maxCust: 65,
   avgPerSale: 6.3,
@@ -54,5 +54,55 @@ seattle.calRanNumOfCust();
 seattle.calNumOfCookPreHour();
 seattle.render();
 console.log(seattle);
+
+
+let tokyo = {
+  location: 'Tokyo',
+  minCust: 3,
+  maxCust: 24,
+  avgPerSale: 1.2,
+  ranCust: [],
+  totalPerLocation: 0,
+  cookPerHour: [],
+  calRanNumOfCust: function () {
+    for (let i = 0; i < hours.length; i++) {
+      this.ranCust.push(randomValue(this.minCust, this.maxCust));
+    }
+  },
+  calNumOfCookPreHour: function () {
+    let value = 0;
+    for (let i = 0; i < hours.length; i++) {
+      value = Math.ceil(this.ranCust[i] * this.avgPerSale);
+      this.totalPerLocation = this.totalPerLocation + value;
+      this.cookPerHour.push(value);
+    }
+
+  },
+
+  render: function () {
+
+    let h2E = document.createElement('h2');
+    container.appendChild(h2E);
+    h2E.textContent = this.location;
+    let unOrderLi = document.createElement('ul');
+    container.appendChild(unOrderLi);
+    let liE = null;
+    for (let i = 0; i < hours.length; i++) {
+      liE = document.createElement('li');
+      unOrderLi.appendChild(liE);
+      liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
+    }
+    let totalList = document.createElement('li');
+    unOrderLi.appendChild(totalList);
+    totalList.textContent = 'total : ' + this.totalPerLocation;
+  },
+
+} ;
+
+tokyo.calRanNumOfCust();
+tokyo.calNumOfCookPreHour();
+tokyo.render();
+console.log(tokyo);
+
 
 
