@@ -1,282 +1,40 @@
 'use strict';
 
-const seattle = {
-  minCust:23,
-  maxCust:65,
-  avgCookie:6.3,
-  avgCustPerHr:[],
-  cookPurchEachHr:[],
-  rand:function () {
-    return Math.random() * (this.maxCust - this.minCust) + this.minCust;
-  },
-  avgCust: function(){
-    for(let i=0 ; i < 14 ; i++){
-      this.avgCustPerHr[i]=this.rand();
-      this.cookPurchEachHr[i]=Math.floor(this.avgCustPerHr[i]*this.avgCookie);
-    }
-  },
+let hours = ['6am','7am','8am','9am','10am','11am','12pm','1pm','2pm','3pm','4pm','5pm','6pm','7pm'];
 
-};
-seattle.avgCust();
-
-
-let container=document.getElementById('container');
-let locationName=document.createElement('h1');
-container.appendChild(locationName);
-locationName.textContent='Seattle';
-
-let unorderedList=document.createElement('ul');
-container.appendChild(unorderedList);
-
-let clock=5;
-let list='';
-let amPm='';
-let total=0;
-
-for(let i =0 ; i<15 ; i++){
-  list=document.createElement('li');
-  unorderedList.appendChild(list);
-  if (clock < 12 ){
-    clock++;
-  }else{
-    clock=1;
-  }
-  if(clock < 12 && i<6){
-    amPm='am';
-  }
-  if(i>=6){
-    amPm='pm';
-  }
-  if(i<14){
-    list.textContent=`${clock}${amPm}: ${seattle.cookPurchEachHr[i]}`;
-    total=total+seattle.cookPurchEachHr[i];
-  }else{
-    list.textContent=`total:${total}`;
-  }
+function randomValue(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
-
-
-const Tokyo = {
-  minCust:3,
-  maxCust:24,
-  avgCookie:1.2,
-  avgCustPerHr:[],
-  cookPurchEachHr:[],
-  rand:function () {
-    return Math.random() * (this.maxCust - this.minCust) + this.minCust;
-  },
-  avgCust: function(){
-    for(let i=0 ; i < 14 ; i++){
-      this.avgCustPerHr[i]=this.rand();
-      this.cookPurchEachHr[i]=Math.floor(this.avgCustPerHr[i]*this.avgCookie);
+let seattle = {
+  location : 'seattle',
+  minCust : 23,
+  maxCust : 65 ,
+  avgPerSale : 6.3 ,
+  ranCust:[],
+  totalPerLocation : 0 ,
+  cookPerHour : [] ,
+  calRanNumOfCust : function (){
+    for (let i=0 ; i<hours.length ; i++ ){
+    this.ranCust.push (randomValue(this.minCust,this.maxCust));
     }
-  },
-
-};
-Tokyo.avgCust();
-
-
-container=document.getElementById('container');
-locationName=document.createElement('h1');
-container.appendChild(locationName);
-locationName.textContent='tokyo';
-
-unorderedList=document.createElement('ul');
-container.appendChild(unorderedList);
-
-clock=5;
-list='';
-amPm='';
-total=0;
-
-for(let i =0 ; i<15 ; i++){
-  list=document.createElement('li');
-  unorderedList.appendChild(list);
-  if (clock < 12 ){
-    clock++;
-  }else{
-    clock=1;
-  }
-  if(clock < 12 && i<6){
-    amPm='am';
-  }
-  if(i>=6){
-    amPm='pm';
-  }
-  if(i<14){
-    list.textContent=`${clock}${amPm}: ${seattle.cookPurchEachHr[i]}`;
-    total=total+Tokyo.cookPurchEachHr[i];
-  }else{
-    list.textContent=`total:${total}`;
-  }
-}
-
-
-const Dubai = {
-  minCust:11,
-  maxCust:38,
-  avgCookie:3.7,
-  avgCustPerHr:[],
-  cookPurchEachHr:[],
-  rand:function () {
-    return Math.random() * (this.maxCust - this.minCust) + this.minCust;
-  },
-  avgCust: function(){
-    for(let i=0 ; i < 14 ; i++){
-      this.avgCustPerHr[i]=this.rand();
-      this.cookPurchEachHr[i]=Math.floor(this.avgCustPerHr[i]*this.avgCookie);
+ },
+  calNumOfCookPreHour :function(){
+     let value =0 ;
+     for (let i=0 ; i<hours.length ; i++ ){
+        value = Math.ceil(this.ranCust[i] * this.avgPerSale);
+        this.totalPerLocation=this.totalPerLocation + value ;
+        this.cookPerHour.push(value);
     }
-  },
 
-};
-Dubai.avgCust();
+ },
 
-
-container=document.getElementById('container');
-locationName=document.createElement('h1');
-container.appendChild(locationName);
-locationName.textContent='Dubai';
-
-unorderedList=document.createElement('ul');
-container.appendChild(unorderedList);
-
-clock=5;
-list='';
-amPm='';
-total=0;
-
-for(let i =0 ; i<15 ; i++){
-  list=document.createElement('li');
-  unorderedList.appendChild(list);
-  if (clock < 12 ){
-    clock++;
-  }else{
-    clock=1;
-  }
-  if(clock < 12 && i<6){
-    amPm='am';
-  }
-  if(i>=6){
-    amPm='pm';
-  }
-  if(i<14){
-    list.textContent=`${clock}${amPm}: ${seattle.cookPurchEachHr[i]}`;
-    total=total+Dubai.cookPurchEachHr[i];
-  }else{
-    list.textContent=`total:${total}`;
-  }
 }
+seattle.calRanNumOfCust();
+seattle.calNumOfCookPreHour();
+console.log (seattle);
 
 
 
-const Paris = {
-  minCust:20,
-  maxCust:38,
-  avgCookie:2.3,
-  avgCustPerHr:[],
-  cookPurchEachHr:[],
-  rand:function () {
-    return Math.random() * (this.maxCust - this.minCust) + this.minCust;
-  },
-  avgCust: function(){
-    for(let i=0 ; i < 14 ; i++){
-      this.avgCustPerHr[i]=this.rand();
-      this.cookPurchEachHr[i]=Math.floor(this.avgCustPerHr[i]*this.avgCookie);
-    }
-  },
-
-};
-Paris.avgCust();
 
 
-container=document.getElementById('container');
-locationName=document.createElement('h1');
-container.appendChild(locationName);
-locationName.textContent='Paris';
-
-unorderedList=document.createElement('ul');
-container.appendChild(unorderedList);
-
-clock=5;
-list='';
-amPm='';
-total=0;
-
-for(let i =0 ; i<15 ; i++){
-  list=document.createElement('li');
-  unorderedList.appendChild(list);
-  if (clock < 12 ){
-    clock++;
-  }else{
-    clock=1;
-  }
-  if(clock < 12 && i<6){
-    amPm='am';
-  }
-  if(i>=6){
-    amPm='pm';
-  }
-  if(i<14){
-    list.textContent=`${clock}${amPm}: ${seattle.cookPurchEachHr[i]}`;
-    total=total+Paris.cookPurchEachHr[i];
-  }else{
-    list.textContent=`total:${total}`;
-  }
-}
-
-
-const Limo = {
-  minCust:2,
-  maxCust:16,
-  avgCookie:4.6,
-  avgCustPerHr:[],
-  cookPurchEachHr:[],
-  rand:function () {
-    return Math.random() * (this.maxCust - this.minCust) + this.minCust;
-  },
-  avgCust: function(){
-    for(let i=0 ; i < 14 ; i++){
-      this.avgCustPerHr[i]=this.rand();
-      this.cookPurchEachHr[i]=Math.floor(this.avgCustPerHr[i]*this.avgCookie);
-    }
-  },
-
-};
-Limo.avgCust();
-
-
-container=document.getElementById('container');
-locationName=document.createElement('h1');
-container.appendChild(locationName);
-locationName.textContent='Limo';
-
-unorderedList=document.createElement('ul');
-container.appendChild(unorderedList);
-
-clock=5;
-list='';
-amPm='';
-total=0;
-
-for(let i =0 ; i<15 ; i++){
-  list=document.createElement('li');
-  unorderedList.appendChild(list);
-  if (clock < 12 ){
-    clock++;
-  }else{
-    clock=1;
-  }
-  if(clock < 12 && i<6){
-    amPm='am';
-  }
-  if(i>=6){
-    amPm='pm';
-  }
-  if(i<14){
-    list.textContent=`${clock}${amPm}: ${seattle.cookPurchEachHr[i]}`;
-    total=total+Limo.cookPurchEachHr[i];
-  }else{
-    list.textContent=`total:${total}`;
-  }
-}
 
