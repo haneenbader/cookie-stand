@@ -252,3 +252,4 @@ lima.calRanNumOfCust();
 lima.calNumOfCookPreHour();
 lima.render();
 console.log(lima);
+//lima
