@@ -2,11 +2,15 @@
 
 let hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm'];
 let container = document.getElementById('container');
+let table = document.createElement('table');
+container.appendChild(table);
+
 function randomValue(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-let allCookis =[] ;
+
+let allCookis = [];
 function Cookies(location, minCust, maxCust, avgPerSale) {
   this.location = location;
   this.minCust = minCust;
@@ -17,13 +21,15 @@ function Cookies(location, minCust, maxCust, avgPerSale) {
   this.cookPerHour = [];
   //ranCust.push(this);
   allCookis.push(this);
+
 }
 
-let cook1 = new Cookies('Seattle', 23, 65, 6.3);
-let cook2 = new Cookies('Tokyo', 3 , 24 , 1.2);
-let cook3 = new Cookies('Dubai',11 , 38 , 3.7);
-let cook4 = new Cookies('Paris',20 , 38 , 2.3);
-let cook5 = new Cookies('Lima',2 , 16 , 4.6);
+
+let seattle = new Cookies('Seattle', 23, 65, 6.3);
+let tokyo = new Cookies('Tokyo', 3, 24, 1.2);
+let dubai = new Cookies('Dubai', 11, 38, 3.7);
+let paris = new Cookies('Paris', 20, 38, 2.3);
+let lima = new Cookies('Lima', 2, 16, 4.6);
 
 
 
@@ -40,256 +46,85 @@ Cookies.prototype.calNumOfCookPreHour = function () {
     this.cookPerHour.push(value);
   }
 };
-for ( let i=0 ; i<allCookis.length ; i++){
+
+
+
+function headerRow() {
+  let firstRow = document.createElement('tr');
+  table.appendChild(firstRow);
+  let emptyCell = document.createElement('th');
+  firstRow.appendChild(emptyCell);
+  let thEl = null;
+  for (let i = 0; i < hours.length; i++) {
+    thEl = document.createElement('th');
+    firstRow.appendChild(thEl);
+    thEl.textContent = hours[i];
+  }
+  let dailyOur = document.createElement('th');
+  firstRow.appendChild(dailyOur);
+  dailyOur.textContent = 'Daily Location Total';
+}
+
+
+function footerRow() {
+  let lastRow = document.createElement('tr');
+  table.appendChild(lastRow);
+
+  let firstCell = document.createElement('th');
+  lastRow.appendChild(firstCell);
+  firstCell.textContent = 'Total';
+
+  let sum = 0; let tdEl = null; let megaTotal = 0;
+  for (let i = 0; i < hours.length; i++) {
+    sum = seattle.cookPerHour[i] + tokyo.cookPerHour[i] +
+      dubai.cookPerHour[i] + paris.cookPerHour[i] +
+      lima.cookPerHour[i];
+    tdEl = document.createElement('td');
+    lastRow.appendChild(tdEl);
+    tdEl.textContent = sum;
+    megaTotal = megaTotal + sum;
+
+  }
+
+  let lastCell = document.createElement('th');
+  lastRow.appendChild(lastCell);
+  lastCell.textContent = megaTotal;
+
+
+}
+
+Cookies.prototype.render = function () {
+  let dataRow = document.createElement('tr');
+  table.appendChild(dataRow);
+
+  let locationName = document.createElement('th');
+  dataRow.appendChild(locationName);
+  locationName.textContent = this.location;
+
+  let tdEl = null;
+  for (let i = 0; i < this.cookPerHour[i]; i++) {
+    tdEl = document.createElement('td');
+    dataRow.appendChild(tdEl);
+    tdEl.textContent = this.cookPerHour[i];
+  }
+  let dailyTotal = document.createElement('th');
+  dataRow.appendChild(dailyTotal);
+  dailyTotal.textContent = this.totalPerLocation;
+};
+
+
+
+
+
+headerRow();
+for (let i = 0; i < allCookis.length; i++) {
   allCookis[i].calRanNumOfCust();
   allCookis[i].calNumOfCookPreHour();
+  allCookis[i].render();
+
 }
+footerRow();
+
 console.log(allCookis);
 
 
-
-// let seattle = {
-//   location: 'Seattle',
-//   minCust: 23,
-//   maxCust: 65,
-//   avgPerSale: 6.3,
-//   ranCust: [],
-//   totalPerLocation: 0,
-//   cookPerHour: [],
-//   calRanNumOfCust: function () {
-//     for (let i = 0; i < hours.length; i++) {
-//       this.ranCust.push(randomValue(this.minCust, this.maxCust));
-//     }
-//   },
-//   calNumOfCookPreHour: function () {
-//     let value = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       value = Math.ceil(this.ranCust[i] * this.avgPerSale);
-//       this.totalPerLocation = this.totalPerLocation + value;
-//       this.cookPerHour.push(value);
-//     }
-
-//   },
-
-//   render: function () {
-
-//     let h2E = document.createElement('h2');
-//     container.appendChild(h2E);
-//     h2E.textContent = this.location;
-//     let unOrderLi = document.createElement('ul');
-//     container.appendChild(unOrderLi);
-//     let liE = null;
-//     for (let i = 0; i < hours.length; i++) {
-//       liE = document.createElement('li');
-//       unOrderLi.appendChild(liE);
-//       liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
-//     }
-//     let totalList = document.createElement('li');
-//     unOrderLi.appendChild(totalList);
-//     totalList.textContent = 'total : ' + this.totalPerLocation;
-//   },
-
-// } ;
-
-// seattle.calRanNumOfCust();
-// seattle.calNumOfCookPreHour();
-// seattle.render();
-// console.log(seattle);
-
-
-// let tokyo = {
-//   location: 'Tokyo',
-//   minCust: 3,
-//   maxCust: 24,
-//   avgPerSale: 1.2,
-//   ranCust: [],
-//   totalPerLocation: 0,
-//   cookPerHour: [],
-//   calRanNumOfCust: function () {
-//     for (let i = 0; i < hours.length; i++) {
-//       this.ranCust.push(randomValue(this.minCust, this.maxCust));
-//     }
-//   },
-//   calNumOfCookPreHour: function () {
-//     let value = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       value = Math.ceil(this.ranCust[i] * this.avgPerSale);
-//       this.totalPerLocation = this.totalPerLocation + value;
-//       this.cookPerHour.push(value);
-//     }
-
-//   },
-
-//   render: function () {
-
-//     let h2E = document.createElement('h2');
-//     container.appendChild(h2E);
-//     h2E.textContent = this.location;
-//     let unOrderLi = document.createElement('ul');
-//     container.appendChild(unOrderLi);
-//     let liE = null;
-//     for (let i = 0; i < hours.length; i++) {
-//       liE = document.createElement('li');
-//       unOrderLi.appendChild(liE);
-//       liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
-//     }
-//     let totalList = document.createElement('li');
-//     unOrderLi.appendChild(totalList);
-//     totalList.textContent = 'total : ' + this.totalPerLocation;
-//   },
-
-// } ;
-
-// tokyo.calRanNumOfCust();
-// tokyo.calNumOfCookPreHour();
-// tokyo.render();
-// console.log(tokyo);
-
-
-
-// let dubai = {
-//   location: 'Dubai',
-//   minCust: 11,
-//   maxCust: 38,
-//   avgPerSale: 3.7,
-//   ranCust: [],
-//   totalPerLocation: 0,
-//   cookPerHour: [],
-//   calRanNumOfCust: function () {
-//     for (let i = 0; i < hours.length; i++) {
-//       this.ranCust.push(randomValue(this.minCust, this.maxCust));
-//     }
-//   },
-//   calNumOfCookPreHour: function () {
-//     let value = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       value = Math.ceil(this.ranCust[i] * this.avgPerSale);
-//       this.totalPerLocation = this.totalPerLocation + value;
-//       this.cookPerHour.push(value);
-//     }
-
-//   },
-
-//   render: function () {
-
-//     let h2E = document.createElement('h2');
-//     container.appendChild(h2E);
-//     h2E.textContent = this.location;
-//     let unOrderLi = document.createElement('ul');
-//     container.appendChild(unOrderLi);
-//     let liE = null;
-//     for (let i = 0; i < hours.length; i++) {
-//       liE = document.createElement('li');
-//       unOrderLi.appendChild(liE);
-//       liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
-//     }
-//     let totalList = document.createElement('li');
-//     unOrderLi.appendChild(totalList);
-//     totalList.textContent = 'total : ' + this.totalPerLocation;
-//   },
-
-// } ;
-
-// dubai.calRanNumOfCust();
-// dubai.calNumOfCookPreHour();
-// dubai.render();
-// console.log(dubai);
-
-
-// let paris = {
-//   location: 'Paris',
-//   minCust: 20,
-//   maxCust: 38,
-//   avgPerSale: 2.3,
-//   ranCust: [],
-//   totalPerLocation: 0,
-//   cookPerHour: [],
-//   calRanNumOfCust: function () {
-//     for (let i = 0; i < hours.length; i++) {
-//       this.ranCust.push(randomValue(this.minCust, this.maxCust));
-//     }
-//   },
-//   calNumOfCookPreHour: function () {
-//     let value = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       value = Math.ceil(this.ranCust[i] * this.avgPerSale);
-//       this.totalPerLocation = this.totalPerLocation + value;
-//       this.cookPerHour.push(value);
-//     }
-
-//   },
-
-//   render: function () {
-
-//     let h2E = document.createElement('h2');
-//     container.appendChild(h2E);
-//     h2E.textContent = this.location;
-//     let unOrderLi = document.createElement('ul');
-//     container.appendChild(unOrderLi);
-//     let liE = null;
-//     for (let i = 0; i < hours.length; i++) {
-//       liE = document.createElement('li');
-//       unOrderLi.appendChild(liE);
-//       liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
-//     }
-//     let totalList = document.createElement('li');
-//     unOrderLi.appendChild(totalList);
-//     totalList.textContent = 'total : ' + this.totalPerLocation;
-//   },
-
-// } ;
-
-// paris.calRanNumOfCust();
-// paris.calNumOfCookPreHour();
-// paris.render();
-// console.log(paris);
-
-
-
-// let lima = {
-//   location: 'Lima',
-//   minCust: 2,
-//   maxCust: 16,
-//   avgPerSale: 4.6,
-//   ranCust: [],
-//   totalPerLocation: 0,
-//   cookPerHour: [],
-//   calRanNumOfCust: function () {
-//     for (let i = 0; i < hours.length; i++) {
-//       this.ranCust.push(randomValue(this.minCust, this.maxCust));
-//     }
-//   },
-//   calNumOfCookPreHour: function () {
-//     let value = 0;
-//     for (let i = 0; i < hours.length; i++) {
-//       value = Math.ceil(this.ranCust[i] * this.avgPerSale);
-//       this.totalPerLocation = this.totalPerLocation + value;
-//       this.cookPerHour.push(value);
-//     }
-
-//   },
-
-//   render: function () {
-
-//     let h2E = document.createElement('h2');
-//     container.appendChild(h2E);
-//     h2E.textContent = this.location;
-//     let unOrderLi = document.createElement('ul');
-//     container.appendChild(unOrderLi);
-//     let liE = null;
-//     for (let i = 0; i < hours.length; i++) {
-//       liE = document.createElement('li');
-//       unOrderLi.appendChild(liE);
-//       liE.textContent = hours[i] + ' : ' + this.cookPerHour[i];
-//     }
-//     let totalList = document.createElement('li');
-//     unOrderLi.appendChild(totalList);
-//     totalList.textContent = 'total : ' + this.totalPerLocation;
-//   },
-
-// } ;
-
-// lima.calRanNumOfCust();
-// lima.calNumOfCookPreHour();
-// lima.render();
-// console.log(lima);
