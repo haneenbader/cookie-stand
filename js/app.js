@@ -20,7 +20,6 @@ function Cookies(location, minCust, maxCust, avgPerSale) {
   this.ranCust = [];
   this.totalPerLocation = 0;
   this.cookPerHour = [];
-  //ranCust.push(this);
   allCookis.push(this);
 
 }
@@ -67,6 +66,27 @@ function headerRow() {
 }
 
 
+
+Cookies.prototype.render = function () {
+  let dataRow = document.createElement('tr');
+  table.appendChild(dataRow);
+
+  let locationName = document.createElement('th');
+  dataRow.appendChild(locationName);
+  locationName.textContent = this.location;
+
+  let tdEl = null;
+  for (let i = 0; i < this.cookPerHour[i]; i++) {
+    tdEl = document.createElement('td');
+    dataRow.appendChild(tdEl);
+    tdEl.textContent = this.cookPerHour[i];
+  }
+  let dailyTotal = document.createElement('th');
+  dataRow.appendChild(dailyTotal);
+  dailyTotal.textContent = this.totalPerLocation;
+};
+
+
 function footerRow() {
   let lastRow = document.createElement('tr');
   table.appendChild(lastRow);
@@ -91,40 +111,7 @@ function footerRow() {
   lastRow.appendChild(lastCell);
   lastCell.textContent = megaTotal;
 
-
 }
-
-Cookies.prototype.render = function () {
-  let dataRow = document.createElement('tr');
-  table.appendChild(dataRow);
-
-  let locationName = document.createElement('th');
-  dataRow.appendChild(locationName);
-  locationName.textContent = this.location;
-
-  let tdEl = null;
-  for (let i = 0; i < this.cookPerHour[i]; i++) {
-    tdEl = document.createElement('td');
-    dataRow.appendChild(tdEl);
-    tdEl.textContent = this.cookPerHour[i];
-  }
-  let dailyTotal = document.createElement('th');
-  dataRow.appendChild(dailyTotal);
-  dailyTotal.textContent = this.totalPerLocation;
-};
-
-
-
-
-headerRow();
-for (let i = 0; i < allCookis.length; i++) {
-  allCookis[i].calRanNumOfCust();
-  allCookis[i].calNumOfCookPreHour();
-  allCookis[i].render();
-}
-footerRow();
-
-// console.log(allCookis);
 
 const form = document.getElementById('cookeForm');
 form.addEventListener('submit', handlesubmitting);
@@ -144,5 +131,16 @@ function handlesubmitting(event) {
   newLocation.calRanNumOfCust();
   newLocation.calNumOfCookPreHour();
   newLocation.render();
+  allCookis.push(newLocation);
 }
+
+headerRow();
+for (let i = 0; i < allCookis.length; i++) {
+  allCookis[i].calRanNumOfCust();
+  allCookis[i].calNumOfCookPreHour();
+  allCookis[i].render();
+}
+footerRow();
+console.log(allCookis);
+
 
