@@ -5,6 +5,7 @@ let container = document.getElementById('container');
 let table = document.createElement('table');
 container.appendChild(table);
 
+
 function randomValue(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
@@ -115,16 +116,33 @@ Cookies.prototype.render = function () {
 
 
 
-
 headerRow();
 for (let i = 0; i < allCookis.length; i++) {
   allCookis[i].calRanNumOfCust();
   allCookis[i].calNumOfCookPreHour();
   allCookis[i].render();
-
 }
 footerRow();
 
-console.log(allCookis);
+// console.log(allCookis);
 
+const form = document.getElementById('cookeForm');
+form.addEventListener('submit', handlesubmitting);
+
+function handlesubmitting(event) {
+  event.preventDefault();
+  let location = event.target.locationName.value;
+  let minCust = event.target.minCust.value;
+  minCust = parseInt(minCust);
+  let maxCust = event.target.maxCust.value;
+  maxCust = parseInt(maxCust);
+  let avgPerSale = event.target.avgPerSale.value;
+  avgPerSale = parseInt(avgPerSale);
+
+
+  let newLocation = new Cookies(location, minCust, maxCust, avgPerSale);
+  newLocation.calRanNumOfCust();
+  newLocation.calNumOfCookPreHour();
+  newLocation.render();
+}
 
