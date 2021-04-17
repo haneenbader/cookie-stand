@@ -1,6 +1,6 @@
 # cookie-stand
 
- **This project  for a client who has a series of "salmon cookies" factories in different locations in the world**
+ _**This project  for a client who has a series of "salmon cookies" factories in different locations in the world**_
 
 
  ## In this website, there is two page :
