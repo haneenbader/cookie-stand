@@ -21,7 +21,6 @@ function Cookies(location, minCust, maxCust, avgPerSale) {
   this.totalPerLocation = 0;
   this.cookPerHour = [];
   allCookis.push(this);
-
 }
 
 
@@ -88,6 +87,7 @@ Cookies.prototype.render = function () {
 
 
 function footerRow() {
+
   let lastRow = document.createElement('tr');
   table.appendChild(lastRow);
 
@@ -95,14 +95,16 @@ function footerRow() {
   lastRow.appendChild(firstCell);
   firstCell.textContent = 'Total';
 
-  let sum = 0; let tdEl = null; let megaTotal = 0;
+  let sum = 0; let tdEl = null;
+  let megaTotal = 0;
   for (let i = 0; i < hours.length; i++) {
-    sum = seattle.cookPerHour[i] + tokyo.cookPerHour[i] +
-      dubai.cookPerHour[i] + paris.cookPerHour[i] +
-      lima.cookPerHour[i];
+    for (let i = 0; i < allCookis.length; i++) {
+      sum = sum + allCookis[0].cookPerHour[i];
+    }
     tdEl = document.createElement('td');
     lastRow.appendChild(tdEl);
     tdEl.textContent = sum;
+
     megaTotal = megaTotal + sum;
 
   }
@@ -130,9 +132,13 @@ function handlesubmitting(event) {
   let newLocation = new Cookies(location, minCust, maxCust, avgPerSale);
   newLocation.calRanNumOfCust();
   newLocation.calNumOfCookPreHour();
+  table.deleteRow(-1);
   newLocation.render();
   allCookis.push(newLocation);
+  footerRow();
+
 }
+
 
 headerRow();
 for (let i = 0; i < allCookis.length; i++) {
@@ -142,5 +148,6 @@ for (let i = 0; i < allCookis.length; i++) {
 }
 footerRow();
 console.log(allCookis);
+
 
 
