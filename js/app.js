@@ -97,18 +97,17 @@ function footerRow() {
 
   let sum = 0; let tdEl = null;
   let megaTotal = 0;
-  for (let i = 0; i < hours.length; i++) {
+
+  for (let j = 0; j < hours.length; j++) {
     for (let i = 0; i < allCookis.length; i++) {
-      sum = sum + allCookis[0].cookPerHour[i];
+      sum = sum + allCookis[i].cookPerHour[j];
     }
     tdEl = document.createElement('td');
     lastRow.appendChild(tdEl);
     tdEl.textContent = sum;
-
     megaTotal = megaTotal + sum;
-
+    sum = 0;
   }
-
   let lastCell = document.createElement('th');
   lastRow.appendChild(lastCell);
   lastCell.textContent = megaTotal;
@@ -148,6 +147,3 @@ for (let i = 0; i < allCookis.length; i++) {
 }
 footerRow();
 console.log(allCookis);
-
-
-
