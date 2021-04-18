@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap');
+
+
+body{
+    background-image: url('https://giffiles.alphacoders.com/143/14340.gif');
+     background-position:center;
+    background-repeat: no-repeat;
+    background-size :cover ;
+    position: relative;
+    font-family: 'Dancing Script', cursive;
+}
+
+body header h1 {
+    display: inline-block;
+    font-weight: bold;
+    color: rgb(49, 36, 17);
+}
+
+body header img {
+    width: 10%;
+}
+
+body header a {
+    float: right;
+    background-color:limegreen;
+    text-decoration-line: none;
+    color: rgb(49, 36, 17);
+}
+
+
+#form {
+    text-align: center;
+    font-weight:bolder;
+    font-size: 25px;
+    outline-style: none;
+
+}
+
+#table {
+    text-align: center;
+    margin-left:25%;
+    margin-right: 25%;
+}
+
+th {
+    font-size: 20px;
+}
