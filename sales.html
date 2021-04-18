@@ -1,14 +1,55 @@
 <!DOCTYPE html>
-<!DOCTYPE html>
-<html >
+<html lang="en">
+
 <head>
-    <title>Document</title>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>salmoon-cookies</title>
+    <link rel='stylesheet' href="css/style.css">
 </head>
-<body>
-    <div id='container'>
 
-    </div>
+<body>
+
+    <header>
+        <img src="img/salmon.png">
+        <h1> SALMON COOKIES</h1>
+        <a href="index.html"> Back to the home page </a>
+    </header>
+
+    <main>
+        <section id='form'>
+            <form id="cookeForm">
+                <legend>Cookies Form </legend>
+                <fieldset>
+                    <label for='locationName'>Location </label>
+                    <input type='text' id='locationName' required>
+                    <br>
+                    <label for="minCust">MinCust</label>
+                    <input type="number" id='minCust' required>
+                    <br>
+                    <label for="maxCust">MaxCust</label>
+                    <input type="number" id='maxCust' required>
+                    <br>
+                    <label for="avgPerSale">AvgPerSale</label>
+                    <input type="number" id='avgPerSale' required>
+                    <br>
+                    <input type="submit" value="Submit">
+                </fieldset>
+            </form>
+        </section>
+        <section id='table'>
+            <div id='container'></div>
+        </section>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
     <script src="js/app.js"></script>
+
 </body>
+
 </html>
