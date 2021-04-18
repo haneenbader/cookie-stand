@@ -27,12 +27,14 @@ body header a {
     color: rgb(49, 36, 17);
 }
 
+/* style sales.html */
 
 #form {
     text-align: center;
     font-weight:bolder;
     font-size: 25px;
     outline-style: none;
+    color: rgb(49, 36, 17);
 
 }
 
@@ -40,8 +42,61 @@ body header a {
     text-align: center;
     margin-left:25%;
     margin-right: 25%;
+    color: rgb(49, 36, 17);
 }
 
 th {
     font-size: 20px;
+}
+
+/* style index.html */
+
+#down {
+     margin-left:7%;
+    margin-right: 7%; 
+    margin-top: 5%;
+    margin-bottom: 3%;
+    align-items: center;
+   
+}
+ #down img {
+display: inline-block;
+width: 200px;
+height:120px;
+}
+
+#up h2 {
+    font-weight: bold;
+    color: rgb(49, 36, 17);
+    font-size: 30px;
+}
+
+#up {
+    margin-left:5%;
+    margin-right:5%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    align-items: center;
+}
+
+#card {
+    display: inline-block;
+    border-style:inset;
+    width: 200px;
+    height:200px;
+    padding: 1%;
+    color: rgb(49, 36, 17);
+       
+}
+
+#card h3 {
+    
+    text-decoration-line: underline;
+    font-size: 25px;
+    font-weight:bold;
+    text-align: center;
+    margin-top: 1%;
+}
+#card p {
+    font-size: 17px;
 }
